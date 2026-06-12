@@ -5,58 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0f172a">
-  <title>Horas Extras</title>
+  <meta name="theme-color" content="#0D3B85">
+  <title>Horas Extras — Samitex</title>
   <link rel="manifest" href="manifest.json">
   <style>
-    /* ── Variables de tema ─────────────────────────────── */
+    /* ── Paleta Samitex ────────────────────────────────── */
     :root {
-      --bg: #0f172a;
-      --bg2: #1e293b;
-      --bg3: #334155;
-      --border: #475569;
-      --text: #f1f5f9;
-      --text2: #94a3b8;
-      --accent: #3b82f6;
-      --accent2: #1d4ed8;
-      --success: #22c55e;
-      --error: #ef4444;
-      --warning: #f59e0b;
-      --card: #1e293b;
-      --hover: #334155;
-      --selected: #1d3a6b;
-      --selected-border: #3b82f6;
-      --radius: 10px;
-      --shadow: 0 2px 12px rgba(0,0,0,0.4);
+      /* Modo oscuro (base: Azul Samitex) */
+      --bg:        #0D3B85;
+      --bg2:       #0a2e6b;
+      --bg3:       #0c3578;
+      --border:    #1A56B4;
+      --text:      #FAFAFA;
+      --text2:     #b8cce8;
+      --accent:    #D49D53;
+      --accent2:   #c08a3e;
+      --success:   #22c55e;
+      --error:     #ef4444;
+      --warning:   #D49D53;
+      --card:      #0a2e6b;
+      --hover:     #1A56B4;
+      --selected:  #1A56B4;
+      --selected-border: #D49D53;
+      --radius:    10px;
+      --shadow:    0 2px 16px rgba(0,0,0,0.5);
     }
 
     [data-theme="light"] {
-      --bg: #f1f5f9;
-      --bg2: #ffffff;
-      --bg3: #e2e8f0;
-      --border: #cbd5e1;
-      --text: #0f172a;
-      --text2: #64748b;
-      --accent: #2563eb;
-      --accent2: #1d4ed8;
-      --success: #16a34a;
-      --error: #dc2626;
-      --warning: #d97706;
-      --card: #ffffff;
-      --hover: #e2e8f0;
-      --selected: #dbeafe;
-      --selected-border: #2563eb;
-      --shadow: 0 2px 12px rgba(0,0,0,0.1);
+      --bg:        #FAFAFA;
+      --bg2:       #ffffff;
+      --bg3:       #F0F2F5;
+      --border:    #d0d9e8;
+      --text:      #212529;
+      --text2:     #5a6a7e;
+      --accent:    #0D3B85;
+      --accent2:   #1A56B4;
+      --success:   #16a34a;
+      --error:     #dc2626;
+      --warning:   #D49D53;
+      --card:      #ffffff;
+      --hover:     #F0F2F5;
+      --selected:  #dbeafe;
+      --selected-border: #0D3B85;
+      --shadow:    0 2px 12px rgba(13,59,133,0.1);
     }
 
-    /* ── Reset y base ──────────────────────────────────── */
+    /* ── Reset ─────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html {
-      font-size: 16px;
-      -webkit-text-size-adjust: 100%;
-    }
-
+    html { font-size: 16px; -webkit-text-size-adjust: 100%; }
     body {
       background: var(--bg);
       color: var(--text);
@@ -65,624 +61,379 @@
       line-height: 1.5;
     }
 
-    /* ── Barra superior ────────────────────────────────── */
+    /* ── Topbar ─────────────────────────────────────────── */
     .topbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
+      position: fixed; top: 0; left: 0; right: 0;
       height: 52px;
       background: var(--bg2);
       border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 0 16px;
-      z-index: 100;
+      z-index: 200;
       box-shadow: var(--shadow);
     }
-
     .topbar-title {
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: 1rem; font-weight: 800;
       color: var(--accent);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
     }
-
-    .topbar-controls {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-
+    .topbar-controls { display: flex; gap: 6px; align-items: center; }
     .ctrl-btn {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      color: var(--text);
-      border-radius: 6px;
-      width: 34px;
-      height: 34px;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text); border-radius: 6px;
+      width: 34px; height: 34px; font-size: 0.9rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
       transition: background 0.15s;
       -webkit-tap-highlight-color: transparent;
     }
-
     .ctrl-btn:active { background: var(--border); }
 
-    /* ── Pantallas ─────────────────────────────────────── */
-    .screen {
-      display: none;
-      padding-top: 68px;
-      padding-bottom: 24px;
-      min-height: 100vh;
-    }
-
+    /* ── Screens ────────────────────────────────────────── */
+    .screen { display: none; min-height: 100vh; }
     .screen.active { display: block; }
 
-    /* ── Login ─────────────────────────────────────────── */
-    #screenLogin {
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
-
+    /* ── Login ──────────────────────────────────────────── */
+    #screenLogin { display: none; }
     #screenLogin.active {
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding-top: 68px; padding-bottom: 24px;
     }
-
     .login-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 24px;
-      width: 100%;
-      max-width: 380px;
-      margin: 0 16px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px 24px;
+      width: 100%; max-width: 380px; margin: 0 16px;
       box-shadow: var(--shadow);
     }
-
-    .login-logo {
-      text-align: center;
-      margin-bottom: 8px;
-    }
-
-    .login-logo span {
-      font-size: 2.5rem;
-    }
-
-    .login-title {
-      text-align: center;
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
+    .login-logo { text-align: center; margin-bottom: 6px; font-size: 2.5rem; }
+    .login-title { text-align: center; font-size: 1.3rem; font-weight: 800; margin-bottom: 2px; }
     .login-subtitle {
-      text-align: center;
-      color: var(--text2);
-      font-size: 0.875rem;
+      text-align: center; color: var(--accent);
+      font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
       margin-bottom: 24px;
     }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 0.875rem;
-      color: var(--text2);
-      margin-bottom: 6px;
-      font-weight: 500;
-    }
-
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 0.85rem; color: var(--text2); margin-bottom: 6px; font-weight: 600; }
     .form-input {
-      width: 100%;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      color: var(--text);
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.15s;
+      width: 100%; background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text); border-radius: 8px; padding: 12px 14px;
+      font-size: 1rem; outline: none; transition: border-color 0.15s;
       -webkit-appearance: none;
     }
-
     .form-input:focus { border-color: var(--accent); }
     .form-input::placeholder { color: var(--text2); }
-
     .btn {
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
+      width: 100%; padding: 13px; border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
       transition: opacity 0.15s, transform 0.1s;
       -webkit-tap-highlight-color: transparent;
+      letter-spacing: 0.02em;
     }
-
     .btn:active { transform: scale(0.98); }
     .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-
+    .btn-primary { background: var(--accent); color: #fff; }
     .btn-secondary {
-      background: var(--bg3);
-      color: var(--text);
-      border: 1px solid var(--border);
-      margin-top: 10px;
+      background: var(--bg3); color: var(--text);
+      border: 1px solid var(--border); margin-top: 10px;
     }
-
-    .btn-danger {
-      background: var(--error);
-      color: #fff;
-    }
-
-    .btn-success {
-      background: var(--success);
-      color: #fff;
-    }
-
+    .btn-success { background: var(--success); color: #fff; }
     .hidden { display: none !important; }
-
     .divider {
-      text-align: center;
-      color: var(--text2);
-      font-size: 0.8rem;
-      margin: 16px 0;
-      position: relative;
+      text-align: center; color: var(--text2); font-size: 0.8rem;
+      margin: 16px 0; position: relative;
     }
-
     .divider::before, .divider::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 40%;
-      height: 1px;
-      background: var(--border);
+      content: ''; position: absolute; top: 50%; width: 40%; height: 1px; background: var(--border);
     }
+    .divider::before { left: 0; } .divider::after { right: 0; }
 
-    .divider::before { left: 0; }
-    .divider::after { right: 0; }
+    /* ── Registro ─────────────────────────────────────── */
+    #screenRegistro { padding-top: 52px; }
 
-    /* ── Registro ──────────────────────────────────────── */
     .page-header {
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 16px;
-      position: sticky;
-      top: 52px;
-      z-index: 90;
+      background: var(--bg2); border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      position: sticky; top: 52px; z-index: 90;
     }
-
     .page-header-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 10px; gap: 8px; flex-wrap: wrap;
     }
-
     .area-badge {
-      background: var(--accent);
-      color: #fff;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.875rem;
-      font-weight: 700;
+      background: var(--accent); color: #fff;
+      padding: 4px 14px; border-radius: 20px;
+      font-size: 0.875rem; font-weight: 800;
+      letter-spacing: 0.04em;
     }
-
-    .header-actions {
-      display: flex;
-      gap: 8px;
-    }
-
+    .header-actions { display: flex; gap: 6px; flex-wrap: wrap; }
     .btn-icon {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      color: var(--text);
-      border-radius: 8px;
-      padding: 7px 14px;
-      font-size: 0.875rem;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      white-space: nowrap;
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text); border-radius: 8px; padding: 7px 12px;
+      font-size: 0.85rem; cursor: pointer; white-space: nowrap;
+      -webkit-tap-highlight-color: transparent; font-weight: 600;
     }
-
     .btn-icon:active { background: var(--border); }
-
-    .search-row {
-      display: flex;
-      gap: 8px;
-    }
-
+    .search-row { display: flex; gap: 8px; }
     .search-input {
-      flex: 1;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      color: var(--text);
-      border-radius: 8px;
-      padding: 9px 12px;
-      font-size: 0.9rem;
-      outline: none;
-      -webkit-appearance: none;
+      flex: 1; background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text); border-radius: 8px; padding: 9px 12px;
+      font-size: 0.9rem; outline: none; -webkit-appearance: none;
     }
-
     .search-input:focus { border-color: var(--accent); }
     .search-input::placeholder { color: var(--text2); }
-
     .contador-badge {
-      background: var(--accent);
-      color: #fff;
-      border-radius: 20px;
-      padding: 4px 12px;
-      font-size: 0.875rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      white-space: nowrap;
+      background: var(--accent); color: #fff;
+      border-radius: 20px; padding: 4px 12px;
+      font-size: 0.875rem; font-weight: 800;
+      display: flex; align-items: center; gap: 4px; white-space: nowrap;
     }
 
-    /* ── Lista personal ────────────────────────────────── */
-    .lista-container {
-      padding: 8px 12px;
-    }
+    .lista-container { padding: 8px 12px 180px; }
 
     .persona-item {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: background 0.12s, border-color 0.12s;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 14px; margin-bottom: 8px;
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; transition: background 0.12s, border-color 0.12s;
+      -webkit-tap-highlight-color: transparent; user-select: none;
     }
-
     .persona-item:active { background: var(--hover); }
-
     .persona-item.seleccionado {
-      background: var(--selected);
-      border-color: var(--selected-border);
+      background: var(--selected); border-color: var(--selected-border);
     }
+    .persona-info { display: flex; flex-direction: column; gap: 2px; }
+    .persona-nombre { font-weight: 700; font-size: 1rem; }
+    .persona-cargo { font-size: 0.8rem; color: var(--text2); }
+    .persona-horas { display: flex; align-items: center; gap: 6px; }
 
-    .persona-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    .btn-hora {
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text); border-radius: 6px;
+      width: 34px; height: 34px; font-size: 1.2rem; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      -webkit-tap-highlight-color: transparent; transition: background 0.1s;
     }
-
-    .persona-nombre {
-      font-weight: 700;
-      font-size: 1rem;
+    .btn-hora:active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .horas-valor {
+      font-weight: 800; font-size: 1rem; color: var(--accent);
+      min-width: 32px; text-align: center;
     }
+    .check-icon { color: var(--success); font-size: 1.3rem; font-weight: 700; }
+    .plus-icon { color: var(--text2); font-size: 1.4rem; width: 28px; text-align: center; }
 
-    .persona-cargo {
-      font-size: 0.8rem;
-      color: var(--text2);
-    }
-
-    .persona-horas {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .input-horas {
-      width: 64px;
-      background: var(--bg3);
-      border: 1px solid var(--selected-border);
-      color: var(--text);
-      border-radius: 6px;
-      padding: 6px 8px;
-      font-size: 1rem;
-      text-align: center;
-      outline: none;
-      -webkit-appearance: none;
-    }
-
-    .check-icon {
-      color: var(--success);
-      font-size: 1.3rem;
-      font-weight: 700;
-    }
-
-    .plus-icon {
-      color: var(--text2);
-      font-size: 1.4rem;
-      width: 28px;
-      text-align: center;
-    }
-
-    /* ── Footer registro ───────────────────────────────── */
     .registro-footer {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      padding: 12px 16px;
-      z-index: 90;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 12px 16px; z-index: 90;
     }
+    .footer-inputs { display: flex; gap: 8px; margin-bottom: 10px; }
+    .footer-inputs .form-input { font-size: 0.9rem; padding: 10px 12px; }
+    .input-fecha { flex: 0 0 140px; }
+    .input-motivo { flex: 1; }
 
-    .footer-inputs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 10px;
+    /* ── Reportes ─────────────────────────────────────── */
+    #screenReportes { padding-top: 52px; }
+
+    .reporte-fixed {
+      position: sticky; top: 52px; z-index: 90;
+      background: var(--bg2); border-bottom: 2px solid var(--border);
     }
-
-    .footer-inputs .form-input {
-      font-size: 0.9rem;
-      padding: 10px 12px;
-    }
-
-    .input-fecha {
-      flex: 0 0 140px;
-    }
-
-    .input-motivo {
-      flex: 1;
-    }
-
-    /* ── Reportes ──────────────────────────────────────── */
     .tabs {
-      display: flex;
-      background: var(--bg2);
+      display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch;
       border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 52px;
-      z-index: 90;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
     }
-
     .tab-btn {
-      flex: 1;
-      min-width: 70px;
-      padding: 12px 8px;
-      background: none;
-      border: none;
-      color: var(--text2);
-      font-size: 0.875rem;
-      font-weight: 600;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
+      flex: 1; min-width: 72px; padding: 12px 8px;
+      background: none; border: none; color: var(--text2);
+      font-size: 0.875rem; font-weight: 700; cursor: pointer;
+      border-bottom: 3px solid transparent;
       transition: color 0.15s, border-color 0.15s;
-      white-space: nowrap;
+      white-space: nowrap; -webkit-tap-highlight-color: transparent;
+    }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .reporte-controls {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px; gap: 8px; flex-wrap: wrap;
+    }
+    .reporte-acciones { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+    .resumen-strip {
+      display: flex; gap: 10px; padding: 10px 16px;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      border-top: 1px solid var(--border);
+    }
+    .resumen-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 10px 16px;
+      min-width: 100px; text-align: center; flex-shrink: 0;
+    }
+    .resumen-label { display: block; font-size: 0.72rem; color: var(--text2); margin-bottom: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+    .resumen-valor { display: block; font-size: 1.4rem; font-weight: 800; color: var(--accent); }
+
+    .reporte-body { padding: 12px 12px 80px; }
+
+    .reporte-area { margin-bottom: 14px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+    .reporte-area-header {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--bg3); padding: 12px 16px; cursor: pointer;
       -webkit-tap-highlight-color: transparent;
     }
+    .area-header-left { display: flex; align-items: center; gap: 10px; }
+    .area-toggle-icon { color: var(--accent); font-size: 0.75rem; transition: transform 0.2s; }
+    .reporte-area-nombre { font-weight: 700; font-size: 0.95rem; }
+    .reporte-area-total { font-weight: 800; color: var(--accent); font-size: 0.9rem; }
 
-    .tab-btn.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-    }
+    .area-detalle { overflow: hidden; transition: max-height 0.25s ease; }
+    .area-detalle.colapsado { display: none; }
 
-    .reporte-header {
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .reporte-acciones {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .resumen-cards {
-      display: flex;
-      gap: 10px;
-      padding: 12px 16px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .resumen-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 12px 16px;
-      min-width: 110px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .resumen-label {
-      display: block;
-      font-size: 0.75rem;
-      color: var(--text2);
-      margin-bottom: 4px;
-    }
-
-    .resumen-valor {
-      display: block;
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--accent);
-    }
-
-    .reporte-body {
-      padding: 0 12px 120px;
-    }
-
-    .reporte-area {
-      margin-bottom: 16px;
-    }
-
-    .reporte-area-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--bg3);
-      border-radius: var(--radius) var(--radius) 0 0;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-bottom: none;
-    }
-
-    .reporte-area-nombre {
-      font-weight: 700;
-      font-size: 0.95rem;
-    }
-
-    .reporte-area-total {
-      font-weight: 700;
-      color: var(--accent);
-      font-size: 0.9rem;
-    }
-
-    .tabla {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-      border: 1px solid var(--border);
-      border-radius: 0 0 var(--radius) var(--radius);
-      overflow: hidden;
-    }
-
+    .tabla { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
     .tabla th {
-      background: var(--bg2);
-      color: var(--text2);
-      padding: 8px 10px;
-      text-align: left;
-      font-weight: 600;
-      font-size: 0.8rem;
-      border-bottom: 1px solid var(--border);
+      background: var(--bg2); color: var(--text2); padding: 8px 10px;
+      text-align: left; font-weight: 700; font-size: 0.78rem;
+      border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.03em;
     }
-
-    .tabla td {
-      padding: 9px 10px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: middle;
-    }
-
+    .tabla td { padding: 9px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
     .tabla tr:last-child td { border-bottom: none; }
     .tabla tr:nth-child(even) td { background: var(--bg); }
+    .horas-cell { font-weight: 800; color: var(--accent); white-space: nowrap; }
+    .motivo-cell { color: var(--text2); font-size: 0.8rem; }
+    .rank-num { font-weight: 800; color: var(--warning); text-align: center; }
+    .ranking-titulo { font-size: 0.9rem; font-weight: 700; padding: 16px 0 10px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.04em; }
+    .empty-msg { text-align: center; color: var(--text2); padding: 40px 20px; font-size: 0.95rem; }
+    .loading-msg { text-align: center; color: var(--text2); padding: 30px; font-size: 0.9rem; }
 
-    .horas-cell {
-      font-weight: 700;
-      color: var(--accent);
-      white-space: nowrap;
+    .btn-anular {
+      background: transparent; border: 1px solid var(--error);
+      color: var(--error); border-radius: 6px; padding: 4px 10px;
+      font-size: 0.78rem; cursor: pointer; white-space: nowrap; font-weight: 600;
     }
+    .btn-anular:active { background: var(--error); color: #fff; }
 
-    .motivo-cell {
-      color: var(--text2);
-      font-size: 0.8rem;
+    /* ── Admin ───────────────────────────────────────── */
+    #screenAdmin { padding-top: 52px; }
+
+    .admin-header {
+      position: sticky; top: 52px; z-index: 90;
+      background: var(--bg2); border-bottom: 1px solid var(--border);
     }
-
-    .rank-num {
-      font-weight: 800;
-      color: var(--warning);
-      text-align: center;
+    .admin-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px; gap: 8px;
     }
-
-    .ranking-titulo {
-      font-size: 0.95rem;
-      font-weight: 700;
-      padding: 16px 0 10px;
-      color: var(--text2);
+    .admin-title { font-weight: 800; font-size: 1rem; color: var(--accent); }
+    .admin-actions { display: flex; gap: 8px; }
+    .admin-tabs {
+      display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch;
+      border-top: 1px solid var(--border);
     }
-
-    .empty-msg {
-      text-align: center;
-      color: var(--text2);
-      padding: 40px 20px;
-      font-size: 0.95rem;
+    .admin-tab {
+      flex-shrink: 0; padding: 10px 16px;
+      background: none; border: none; color: var(--text2);
+      font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      border-bottom: 3px solid transparent;
+      -webkit-tap-highlight-color: transparent; white-space: nowrap;
     }
+    .admin-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-    .loading-msg {
-      text-align: center;
-      color: var(--text2);
-      padding: 30px;
-      font-size: 0.9rem;
+    .admin-body { padding: 12px 12px 80px; }
+    .admin-toolbar { margin-bottom: 12px; }
+    .btn-admin-nuevo {
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 8px;
+      padding: 10px 20px; font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
     }
+    .btn-admin-nuevo:active { opacity: 0.8; }
+    .admin-table-wrap { overflow-x: auto; }
+    .td-acciones { white-space: nowrap; display: flex; gap: 6px; padding: 6px 10px; }
+    .btn-editar {
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text); border-radius: 6px; padding: 4px 10px;
+      font-size: 0.85rem; cursor: pointer;
+    }
+    .btn-editar:active { background: var(--border); }
 
-    /* ── Toast ─────────────────────────────────────────── */
+    /* ── Modal ───────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      z-index: 300; display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+    }
+    .modal-box {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); width: 100%; max-width: 420px;
+      box-shadow: var(--shadow); overflow: hidden;
+    }
+    .modal-header {
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal-titulo { font-weight: 800; font-size: 1rem; }
+    .modal-body { padding: 20px; max-height: 60vh; overflow-y: auto; }
+    .modal-footer {
+      padding: 14px 20px; border-top: 1px solid var(--border);
+      display: flex; gap: 10px; justify-content: flex-end;
+    }
+    .btn-modal {
+      padding: 10px 22px; border: none; border-radius: 8px;
+      font-size: 0.95rem; font-weight: 700; cursor: pointer;
+    }
+    .btn-modal-confirmar { background: var(--accent); color: #fff; }
+    .btn-modal-cancelar { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
+
+    /* ── Toast ───────────────────────────────────────── */
     .toast {
-      position: fixed;
-      bottom: 90px;
-      left: 50%;
+      position: fixed; bottom: 90px; left: 50%;
       transform: translateX(-50%);
-      padding: 11px 22px;
-      border-radius: 24px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      z-index: 999;
+      padding: 11px 22px; border-radius: 24px;
+      font-size: 0.9rem; font-weight: 700;
+      z-index: 999; white-space: nowrap; box-shadow: var(--shadow);
       animation: fadeInUp 0.2s ease, fadeOut 0.3s ease 2.7s forwards;
-      white-space: nowrap;
-      box-shadow: var(--shadow);
     }
-
     .toast-ok { background: var(--success); color: #fff; }
     .toast-error { background: var(--error); color: #fff; }
-
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateX(-50%) translateY(10px); }
       to   { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
+    @keyframes fadeOut { to { opacity: 0; } }
 
-    @keyframes fadeOut {
-      to { opacity: 0; }
-    }
-
-    /* ── Espaciado footer ──────────────────────────────── */
-    .screen-registro-content {
-      padding-bottom: 160px;
-    }
-
-    /* ── Responsive ────────────────────────────────────── */
     @media (min-width: 600px) {
       .login-box { max-width: 420px; }
       .lista-container { max-width: 600px; margin: 0 auto; }
-      .reporte-body { max-width: 800px; margin: 0 auto; }
+      .reporte-body, .admin-body { max-width: 860px; margin: 0 auto; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── Barra superior ─────────────────────────────────────── -->
+<!-- Topbar -->
 <div class="topbar">
   <span class="topbar-title">⏱ Horas Extras</span>
   <div class="topbar-controls">
-    <button class="ctrl-btn" id="btnFontDown" title="Reducir texto">A-</button>
-    <button class="ctrl-btn" id="btnFontUp" title="Aumentar texto">A+</button>
-    <button class="ctrl-btn" id="btnTheme" title="Cambiar tema">☀️</button>
+    <button class="ctrl-btn" id="btnFontDown">A-</button>
+    <button class="ctrl-btn" id="btnFontUp">A+</button>
+    <button class="ctrl-btn" id="btnTheme">☀️</button>
   </div>
 </div>
 
-<!-- ── LOGIN ─────────────────────────────────────────────── -->
+<!-- LOGIN -->
 <div class="screen active" id="screenLogin">
   <div class="login-box">
-    <div class="login-logo"><span>🏭</span></div>
+    <div class="login-logo">🏭</div>
     <h1 class="login-title">Horas Extras</h1>
-    <p class="login-subtitle">Sistema de registro</p>
+    <p class="login-subtitle">Samitex · Sistema de registro</p>
 
     <div id="loginNormal">
       <div class="form-group">
         <label class="form-label">Usuario</label>
-        <input class="form-input" id="inputUsuario" type="text"
-          placeholder="supervisora.corte" autocomplete="username" autocapitalize="none">
+        <input class="form-input" id="inputUsuario" type="text" placeholder="supervisora.corte" autocomplete="username" autocapitalize="none">
       </div>
       <div class="form-group">
         <label class="form-label">PIN</label>
-        <input class="form-input" id="inputPin" type="password"
-          placeholder="••••" inputmode="numeric" autocomplete="current-password">
+        <input class="form-input" id="inputPin" type="password" placeholder="••••" inputmode="numeric" autocomplete="current-password">
       </div>
       <button class="btn btn-primary" id="btnLogin">Ingresar</button>
       <div class="divider">o</div>
@@ -692,11 +443,10 @@
     <div id="loginLector" class="hidden">
       <div class="form-group">
         <label class="form-label">PIN de acceso</label>
-        <input class="form-input" id="inputPinLector" type="password"
-          placeholder="••••" inputmode="numeric">
+        <input class="form-input" id="inputPinLector" type="password" placeholder="••••" inputmode="numeric">
       </div>
       <button class="btn btn-primary" id="btnLoginLector">Ver reportes</button>
-      <button class="btn btn-secondary" id="btnModoLector2" onclick="
+      <button class="btn btn-secondary" onclick="
         document.getElementById('loginNormal').classList.remove('hidden');
         document.getElementById('loginLector').classList.add('hidden');
       ">← Volver</button>
@@ -704,7 +454,7 @@
   </div>
 </div>
 
-<!-- ── REGISTRO ───────────────────────────────────────────── -->
+<!-- REGISTRO -->
 <div class="screen" id="screenRegistro">
   <div class="page-header">
     <div class="page-header-top">
@@ -716,52 +466,82 @@
       </div>
     </div>
     <div class="search-row">
-      <input class="search-input" id="inputBusqueda" type="search"
-        placeholder="Buscar persona..." autocomplete="off">
-      <div class="contador-badge">
-        <span id="contadorSeleccionados">0</span> sel.
-      </div>
+      <input class="search-input" id="inputBusqueda" type="search" placeholder="Buscar persona..." autocomplete="off">
+      <div class="contador-badge"><span id="contadorSeleccionados">0</span> sel.</div>
     </div>
   </div>
 
-  <div class="screen-registro-content">
-    <div class="lista-container" id="listaPersonal"></div>
-  </div>
+  <div class="lista-container" id="listaPersonal"></div>
 
   <div class="registro-footer">
     <div class="footer-inputs">
       <input class="form-input input-fecha" id="inputFecha" type="date">
-      <input class="form-input input-motivo" id="inputMotivo"
-        type="text" placeholder="Motivo de horas extras">
+      <input class="form-input input-motivo" id="inputMotivo" type="text" placeholder="Motivo de horas extras">
     </div>
     <button class="btn btn-success" id="btnGuardar">Guardar registro</button>
   </div>
 </div>
 
-<!-- ── REPORTES ───────────────────────────────────────────── -->
+<!-- REPORTES -->
 <div class="screen" id="screenReportes">
-  <div class="tabs">
-    <button class="tab-btn active" id="tab-dia">Día</button>
-    <button class="tab-btn" id="tab-semana">Semana</button>
-    <button class="tab-btn" id="tab-quincena">Quincena</button>
-    <button class="tab-btn" id="tab-mes">Mes</button>
-  </div>
-
-  <div class="reporte-header">
-    <input class="form-input" id="inputFechaReporte" type="date" style="max-width:160px">
-    <div class="reporte-acciones">
-      <button class="btn-icon" id="btnVolverRegistro">← Volver</button>
-      <button class="btn-icon" id="btnLogoutReporte">Salir</button>
+  <div class="reporte-fixed">
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-dia">Día</button>
+      <button class="tab-btn" id="tab-semana">Semana</button>
+      <button class="tab-btn" id="tab-quincena">Quincena</button>
+      <button class="tab-btn" id="tab-mes">Mes</button>
     </div>
+    <div class="reporte-controls">
+      <input class="form-input" id="inputFechaReporte" type="date" style="max-width:160px">
+      <div class="reporte-acciones">
+        <button class="btn-icon hidden" id="btnAdmin">⚙️ Admin</button>
+        <button class="btn-icon" id="btnVolverRegistro">← Volver</button>
+        <button class="btn-icon" id="btnLogoutReporte">Salir</button>
+      </div>
+    </div>
+    <div class="resumen-strip" id="resumenReporte"></div>
   </div>
-
-  <div class="resumen-cards" id="resumenReporte"></div>
 
   <p class="loading-msg" id="loadingReporte" style="display:none">Cargando...</p>
 
   <div class="reporte-body">
     <div id="tablaReporte"></div>
     <div id="rankingReporte"></div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="screen" id="screenAdmin">
+  <div class="admin-header">
+    <div class="admin-topbar">
+      <span class="admin-title">⚙️ Administración</span>
+      <div class="admin-actions">
+        <button class="btn-icon" id="btnVolverAdmin">← Reportes</button>
+        <button class="btn-icon" id="btnLogoutAdmin">Salir</button>
+      </div>
+    </div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" id="adminTab-personal">Personal</button>
+      <button class="admin-tab" id="adminTab-supervisoras">Supervisoras</button>
+      <button class="admin-tab" id="adminTab-ingenieros">Ingenieros</button>
+      <button class="admin-tab" id="adminTab-areas">Áreas</button>
+      <button class="admin-tab" id="adminTab-config">Config</button>
+    </div>
+  </div>
+  <div class="admin-body" id="adminContenido"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay hidden" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-titulo" id="modalTitulo">Título</span>
+    </div>
+    <div class="modal-body" id="modalCuerpo"></div>
+    <div class="modal-footer">
+      <button class="btn-modal btn-modal-cancelar" id="btnModalCancelar">Cancelar</button>
+      <button class="btn-modal btn-modal-confirmar" id="btnModalConfirmar">Confirmar</button>
+    </div>
   </div>
 </div>
 
